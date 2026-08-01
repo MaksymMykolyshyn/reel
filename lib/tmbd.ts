@@ -1,5 +1,6 @@
 import { Movie } from "@/types/movie";
 
+
 const BASE_URL = "https://api.themoviedb.org/3";
 const today = new Date().toISOString().split("T")[0];
 console.log("TMDB token exists:", !!process.env.TMDB_READ_ACCESS_TOKEN);
@@ -9,13 +10,14 @@ const options = {
   },
 };
 
-export async function getMovie(id: number): Promise<Movie> {
-  const response = await fetch(`${BASE_URL}/movie/${id}`, options);
+export async function getMovie(id: number, locale: string): Promise<Movie> {
+  const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
+  const response = await fetch(`${BASE_URL}/movie/${id}?language=${tmdbLanguage}`, options);
 
   return response.json();
 }
 
-export async function getWeekMovie() {
+export async function getWeekMovie(locale: string) {
   const response = await fetch(`${BASE_URL}/trending/movie/week`, options);
 
   if (!response.ok) {
@@ -25,7 +27,7 @@ export async function getWeekMovie() {
   const data = await response.json();
   const movieId = data.results[0].id;
 
-  return await getMovie(movieId);
+  return await getMovie(movieId, locale);
 }
 
 export async function getTopMovies() {

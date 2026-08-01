@@ -1,4 +1,7 @@
+import {useTranslations} from 'next-intl';
+
 export default function Header() {
+  const t = useTranslations('Header');
   const date = new Date();
   const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
   const monthName = date.toLocaleDateString("en-US", { month: "long" });
@@ -14,7 +17,7 @@ export default function Header() {
       </div>
       <header className="text-xl font-bold text-center h-55 flex flex-col justify-center">
         <h1 className="text-[130px] leading-none">Reel</h1>
-        <div className="text-secondary">Every Frame Has a Story.</div>
+        <div className="text-secondary">{t('title')}</div>
         <div className="width-full bg-secondary h-px mt-8"></div>
       </header>
     </div>

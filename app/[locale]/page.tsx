@@ -11,7 +11,7 @@ import Header from "@/components/layout/header/header";
 import ScrollNavigation from "@/components/main/scrollNavigation";
 import Hero from "@/components/main/hero";
 import MovieSection from "@/components/main/movieSection";
-import { ArchiveSection } from "@/components/archive/archiveSection"
+import { ArchiveSection } from "@/components/archive/archiveSection";
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin", "cyrillic"],
@@ -19,8 +19,11 @@ const playfairDisplay = Playfair_Display({
   display: "swap",
 });
 
-export default async function Home() {
-  const movie = await getWeekMovie();
+type Params = Promise<{ locale: string }>;
+
+export default async function Home({ params }: { params: Params }) {
+  const { locale } = await params;
+  const movie = await getWeekMovie(locale);
 
   const topMovies = await getTopMovies();
   const trendingMovies = await getTrendingMovies();
@@ -39,18 +42,33 @@ export default async function Home() {
         <Hero movie={movie} />
       </main>
       <section>
-        <MovieSection title="Editor's Choice" movies={topMovies.results} showRating/>
+        <MovieSection
+          title="Editor's Choice"
+          movies={topMovies.results}
+          showRating
+        />
 
-        <MovieSection title="Top Trending" movies={trendingMovies.results} showRating/>
+        <MovieSection
+          title="Top Trending"
+          movies={trendingMovies.results}
+          showRating
+        />
 
-        <MovieSection title="Upcoming" movies={upcomingMovies.results} showReleaseDate/>
+        <MovieSection
+          title="Upcoming"
+          movies={upcomingMovies.results}
+          showReleaseDate
+        />
 
-        <MovieSection title="Now Playing" movies={nowPlayingMovies.results} showRating/>
+        <MovieSection
+          title="Now Playing"
+          movies={nowPlayingMovies.results}
+          showRating
+        />
       </section>
       <section>
-        <ArchiveSection/>
+        <ArchiveSection />
       </section>
     </div>
   );
 }
-

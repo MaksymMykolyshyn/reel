@@ -5,10 +5,20 @@ import Image from "next/image";
 import { getPoster } from "@/lib/tmdb-images";
 import GenreBadge from "@/components/movie/genreBadge";
 import Link from "next/link";
-export async function ArchiveSection() {
-  const titanicMovie = await getTitanicMovie();
+import { getTranslations } from "next-intl/server";
+
+type ArchiveSectionProps = {
+  locale: string;
+}
+
+export async function ArchiveSection({ locale }: ArchiveSectionProps) {
+  const t = await getTranslations({
+    locale,
+    namespace: "Archive"
+  })
+  const titanicMovie = await getTitanicMovie(locale);
   const stars = Math.round(titanicMovie.vote_average / 2);
-  const director = titanicMovie.credits.crew.find(
+  const director = titanicMovie.credits?.crew?.find(
     (person) => person.job === "Director",
   );
 
@@ -26,12 +36,11 @@ export async function ArchiveSection() {
 
           <div className="absolute bottom-8 left-8 text-white">
             <div className="uppercase tracking-[0.3em] text-xs">
-              Circa 1940s
+              {t("titleImage")}
             </div>
 
             <div className="italic text-2xl max-w-xs">
-              The golden age of cinema — when stories were told in silver and
-              shadow.
+              {t("descriptionImage")}
             </div>
           </div>
         </div>
@@ -39,7 +48,7 @@ export async function ArchiveSection() {
       <div className="w-[60%] flex flex-col">
         <div className="w-[90%] m-auto">
           <div className="text-accent uppercase text-xs tracking-[0.3em] pt-3">
-            archive
+            {t("archive")}
           </div>
           <div className="flex items-center gap-4 my-10">
             <div className="flex-1 h-px bg-border"></div>
@@ -47,16 +56,13 @@ export async function ArchiveSection() {
             <div className="flex-1 h-px bg-border"></div>
           </div>
 
-          <div className="font-bold text-6xl">Explore Cinema</div>
-          <div className="italic text-6xl">Through the Decades</div>
+          <div className="font-bold text-6xl">{t("exploreCinema")}</div>
+          <div className="italic text-6xl">{t("title")}</div>
           <div className="w-2/3 pt-6">
-            From the silent flickering frames of the 1920s to the digital epics
-            of today — the Archive is a living testament to a century of
-            storytelling. Browse by decade, genre, auteur, or icon. Every film
-            has its place in the canon. Yours awaits.
+            {t("description")}
           </div>
           <button className="text-foreground border-2 border-foreground uppercase tracking-[0.2em] flex flex-row items-center justify-center gap-2 w-75 h-12.5 mt-16">
-            Enter the archive <FaArrowRightLong />
+            {t("archiveButton")} <FaArrowRightLong />
           </button>
           <div className="flex items-center gap-4 my-10">
             <div className="flex-1 h-px bg-border"></div>
@@ -65,8 +71,8 @@ export async function ArchiveSection() {
           </div>
           <div className="border border-border bg-card">
             <div className="flex justify-between border-b border-border px-4 py-2 uppercase tracking-[0.3em] text-[10px] text-secondary">
-              <span>Greatest Film of All Time</span>
-              <span>by the number of Oscars</span>
+              <span>{t("greatest")}</span>
+              <span>{t("oskars")}</span>
             </div>
             <div className="flex">
               <Image

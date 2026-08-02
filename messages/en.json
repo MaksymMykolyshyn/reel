@@ -1,5 +1,22 @@
 {
   "Header": {
     "title": "Every Frame Has a Story"
+  },
+  "Main": {
+    "editorsChoice": "Editor's Choice",
+    "topTrending": "Top Trending",
+    "upcoming": "Upcoming",
+    "nowPlaying": "Now Playing"
+  },
+  "Archive": {
+    "exploreCinema": "Explore Cinema",
+    "title": "Through the Decades",
+    "description": "From the silent flickering frames of the 1920s to the digital epics of today — the Archive is a living testament to a century of storytelling. Browse by decade, genre, auteur, or icon. Every film has its place in the canon. Yours awaits.",
+    "titleImage": "Circa 1940s",
+    "descriptionImage": "The golden age of cinema — when stories were told in silver and shadow.",
+    "archive": "archive",
+    "archiveButton": "Enter the archive",
+    "greatest": "Greatest Film of All Time",
+    "oskars": "by the number of Oscars"
   }
 }

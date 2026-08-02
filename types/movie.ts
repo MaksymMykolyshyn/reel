@@ -71,3 +71,24 @@ export type Movie = {
   vote_count: number;
   credits: MovieCredits;
 };
+
+export type MovieResponse = {
+  page: number;
+  results: Movie[];
+  total_pages: number;
+  total_results: number;
+};
+
+export type MovieVideo = {
+  id: string;
+  key: string;
+  name: string;
+  site: string;
+  type: string;
+  official: boolean;
+};
+
+export type MovieVideos = {
+  id: number;
+  results: MovieVideo[];
+};

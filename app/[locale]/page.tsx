@@ -25,10 +25,10 @@ export default async function Home({ params }: { params: Params }) {
   const { locale } = await params;
   const movie = await getWeekMovie(locale);
 
-  const topMovies = await getTopMovies();
-  const trendingMovies = await getTrendingMovies();
-  const upcomingMovies = await getUpcomingMovies();
-  const nowPlayingMovies = await getNowPlayingMovies();
+  const topMovies = await getTopMovies(locale);
+  const trendingMovies = await getTrendingMovies(locale);
+  const upcomingMovies = await getUpcomingMovies(locale);
+  const nowPlayingMovies = await getNowPlayingMovies(locale);
 
   return (
     <div
@@ -43,31 +43,31 @@ export default async function Home({ params }: { params: Params }) {
       </main>
       <section>
         <MovieSection
-          title="Editor's Choice"
+          title="editorsChoice"
           movies={topMovies.results}
           showRating
         />
 
         <MovieSection
-          title="Top Trending"
+          title="topTrending"
           movies={trendingMovies.results}
           showRating
         />
 
         <MovieSection
-          title="Upcoming"
+          title="upcoming"
           movies={upcomingMovies.results}
           showReleaseDate
         />
 
         <MovieSection
-          title="Now Playing"
+          title="nowPlaying"
           movies={nowPlayingMovies.results}
           showRating
         />
       </section>
       <section>
-        <ArchiveSection />
+        <ArchiveSection locale={locale}/>
       </section>
     </div>
   );

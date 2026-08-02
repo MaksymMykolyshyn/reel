@@ -7,3 +7,11 @@ export function getPoster(path: string) {
 export function getBackdrop(path: string) {
   return `${IMAGE_URL}/original${path}`;
 }
+
+export function getProfile(path: string | null) {
+  if (!path) {
+    return "/images/person-placeholder.jpg";
+  }
+
+  return `${IMAGE_URL}/w500${path}`;
+}

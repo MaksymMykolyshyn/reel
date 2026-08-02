@@ -1,18 +1,21 @@
-'use client'
+"use client";
 
-import Image from "next/image";
-import { FaRegStar } from "react-icons/fa";
-import GenreBadge from "../movie/genreBadge";
-import { getBackdrop } from "@/lib/tmdb-images";
-import { Movie } from "@/types/movie";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+import { FaRegStar } from "react-icons/fa";
+import { getBackdrop } from "@/lib/tmdb-images";
+import { FaArrowRightLong } from "react-icons/fa6";
+
+import GenreBadge from "../movie/genreBadge";
+
+import { Movie } from "@/types/movie";
 
 type HeroProps = {
   movie: Movie;
 };
 
 export default function Hero({ movie }: HeroProps) {
-    
   const router = useRouter();
   return (
     <section className="w-[90%]">
@@ -41,7 +44,8 @@ export default function Hero({ movie }: HeroProps) {
             </span>
 
             <div className="font-semibold flex items-center gap-2">
-              {movie.vote_average.toFixed(1)}<FaRegStar className="mt-0.5 text-accent" />
+              {movie.vote_average.toFixed(1)}
+              <FaRegStar className="mt-0.5 text-accent" />
             </div>
           </div>
 
@@ -51,10 +55,11 @@ export default function Hero({ movie }: HeroProps) {
             ))}
           </div>
           <button
-            className="text-left border border-accent text-accent w-50 font-semibold px-4 py-1 uppercase tracking-wide"
+            className="text-left border border-accent text-accent w-fit font-semibold px-4 py-1 uppercase tracking-wide flex flex-row items-center gap-3"
             onClick={() => router.push(`/movie/${movie.id}`)}
           >
-            See more
+            <span>See more</span>
+             <FaArrowRightLong />
           </button>
         </div>
 

@@ -9,7 +9,7 @@ export default function HeaderMain() {
           <Link className="flex flex-row items-center gap-2" href={"/"}>
             <FaArrowLeftLong /> home
           </Link>
-          <div className="text-4xl font-bold">Reel</div>
+          <div className="text-4xl font-bold text-foreground">Reel</div>
           <div className="text-3xl border rounded-full p-1 ">
             <CiUser />
           </div>

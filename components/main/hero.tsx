@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FaRegStar } from "react-icons/fa";
 import { getBackdrop } from "@/lib/tmdb-images";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { useTranslations } from "next-intl";
 
 import GenreBadge from "../movie/genreBadge";
 
@@ -16,17 +17,17 @@ type HeroProps = {
 };
 
 export default function Hero({ movie }: HeroProps) {
+  const t = useTranslations("Hero")
   const router = useRouter();
   return (
     <section className="w-[90%]">
       <div className="flex justify-between items-center text-lg mb-6">
         <div className="bg-accent text-white px-4 py-1 uppercase tracking-wide">
-          Trending this week
+          {t("trend")}
         </div>
 
         <p className="italic text-secondary">
-          {`"Cinema is a matter of what's in the frame and what's out."`} —
-          Martin Scorsese
+          {t("quote")}
         </p>
       </div>
 
@@ -55,10 +56,10 @@ export default function Hero({ movie }: HeroProps) {
             ))}
           </div>
           <button
-            className="text-left border border-accent text-accent w-fit font-semibold px-4 py-1 uppercase tracking-wide flex flex-row items-center gap-3"
+            className="text-left border border-accent text-accent w-fit font-semibold px-4 py-1 uppercase tracking-wide flex flex-row items-center gap-3 hover:bg-accent hover:text-background transition cursor-pointer"
             onClick={() => router.push(`/movie/${movie.id}`)}
           >
-            <span>See more</span>
+            <span>{t("seeMore")}</span>
              <FaArrowRightLong />
           </button>
         </div>

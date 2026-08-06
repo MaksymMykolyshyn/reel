@@ -9,13 +9,11 @@ import { getTranslations } from "next-intl/server";
 
 type ArchiveSectionProps = {
   locale: string;
-}
+  id: "archive";
+};
 
-export async function ArchiveSection({ locale }: ArchiveSectionProps) {
-  const t = await getTranslations({
-    locale,
-    namespace: "Archive"
-  })
+export async function ArchiveSection({ locale, id }: ArchiveSectionProps) {
+  const t = await getTranslations("Archive");
   const titanicMovie = await getTitanicMovie(locale);
   const stars = Math.round(titanicMovie.vote_average / 2);
   const director = titanicMovie.credits?.crew?.find(
@@ -23,7 +21,7 @@ export async function ArchiveSection({ locale }: ArchiveSectionProps) {
   );
 
   return (
-    <div className="w-full flex gap-10 items-stretch">
+    <div className="w-full flex gap-10 items-stretch" id={id}>
       <div className="w-[40%] flex">
         <div className="relative flex-1">
           <Image
@@ -58,10 +56,8 @@ export async function ArchiveSection({ locale }: ArchiveSectionProps) {
 
           <div className="font-bold text-6xl">{t("exploreCinema")}</div>
           <div className="italic text-6xl">{t("title")}</div>
-          <div className="w-2/3 pt-6">
-            {t("description")}
-          </div>
-          <button className="text-foreground border-2 border-foreground uppercase tracking-[0.2em] flex flex-row items-center justify-center gap-2 w-75 h-12.5 mt-16">
+          <div className="w-2/3 pt-6">{t("description")}</div>
+          <button className="text-foreground border-2 border-foreground uppercase tracking-[0.2em] flex flex-row items-center justify-center gap-2 w-75 h-12.5 mt-16 hover:bg-black hover:text-background transition duration-200">
             {t("archiveButton")} <FaArrowRightLong />
           </button>
           <div className="flex items-center gap-4 my-10">
@@ -83,7 +79,7 @@ export async function ArchiveSection({ locale }: ArchiveSectionProps) {
                 className="border-r border-border object-cover"
               />
               <div className="flex flex-col flex-1 p-5">
-                <Link href="/movie/597">
+                <Link className="w-min hover:text-accent transition duration-200" href="/movie/597">
                   <h3 className="text-5xl italic leading-none">
                     {titanicMovie.title}
                   </h3>

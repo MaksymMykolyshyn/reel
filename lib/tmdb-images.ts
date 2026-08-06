@@ -15,3 +15,11 @@ export function getProfile(path: string | null) {
 
   return `${IMAGE_URL}/w500${path}`;
 }
+
+export function getProfileFull(path: string | null) {
+  if (!path) {
+    return "/images/person-placeholder.jpg";
+  }
+
+  return `${IMAGE_URL}/original${path}`;
+}

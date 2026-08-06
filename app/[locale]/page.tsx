@@ -12,6 +12,7 @@ import ScrollNavigation from "@/components/main/scrollNavigation";
 import Hero from "@/components/main/hero";
 import MovieSection from "@/components/main/movieSection";
 import { ArchiveSection } from "@/components/archive/archiveSection";
+import Footer from "@/components/layout/footer";
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin", "cyrillic"],
@@ -43,32 +44,41 @@ export default async function Home({ params }: { params: Params }) {
       </main>
       <section>
         <MovieSection
+          id="editors-choice"
           title="editorsChoice"
           movies={topMovies.results}
           showRating
+          locale={locale}
         />
 
         <MovieSection
+          id="top-trending"
           title="topTrending"
           movies={trendingMovies.results}
           showRating
+          locale={locale}
         />
 
         <MovieSection
+          id="upcoming"
           title="upcoming"
           movies={upcomingMovies.results}
           showReleaseDate
+          locale={locale}
         />
 
         <MovieSection
+          id="now-playing"
           title="nowPlaying"
           movies={nowPlayingMovies.results}
           showRating
+          locale={locale}
         />
       </section>
       <section>
-        <ArchiveSection locale={locale}/>
+        <ArchiveSection id="archive" locale={locale} />
       </section>
+      <Footer />
     </div>
   );
 }

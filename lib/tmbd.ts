@@ -1,4 +1,5 @@
-import { Movie, MovieResponse, MovieVideos, MovieCredits  } from "@/types/movie";
+import { Movie, MovieResponse, MovieVideos, MovieCredits, Person } from "@/types/movie";
+import MovieRecomend from "@/components/movie/movieRecomend"
 
 
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -9,6 +10,8 @@ const options = {
     Authorization: `Bearer ${process.env.TMDB_READ_ACCESS_TOKEN}`,
   },
 };
+
+
 
 export async function getMovie(id: number, locale: string): Promise<Movie> {
   const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
@@ -126,4 +129,30 @@ export async function getTitanicMovie(locale: string): Promise<Movie> {
   }
 
   return response.json();
+}
+
+export async function getMoviesByGenre(locale: string, id: number): Promise<MovieResponse> {
+  const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
+  const response = await fetch(
+    `${BASE_URL}/discover/movie?with_genres=${id}&language=${tmdbLanguage}`,
+    options,
+  );
+  if(!response.ok) {
+    throw new Error("Failed to fetch movies by genres")
+  }
+
+  return response.json()
+}
+export async function getActorById(locale: string, id: number): Promise<Person> {
+  const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
+
+  const response = await fetch(
+    `${BASE_URL}/person/${id}?&language=${tmdbLanguage}`,
+    options,
+  );
+  if(!response.ok) {
+    throw new Error("Failed to fetch movies by genres")
+  }
+
+  return response.json()
 }

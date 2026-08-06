@@ -2,6 +2,11 @@
   "Header": {
     "title": "Every Frame Has a Story"
   },
+  "Hero": {
+    "trend": "Trending this week",
+    "quote": "'Cinema is a matter of what's in the frame and what's out.' — Martin Scorsese",
+    "seeMore": "See more"
+  },
   "Main": {
     "editorsChoice": "Editor's Choice",
     "topTrending": "Top Trending",

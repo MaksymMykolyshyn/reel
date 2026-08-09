@@ -23,9 +23,8 @@ export function MovieCard({
 
   const router = useRouter();
 
-
   return (
-    <div className="w-full max-w-80 border border-primary p-4 flex flex-col transition hover:border-accent justify-start">
+    <div className="w-full  border border-primary p-4 flex flex-col transition hover:border-accent justify-start">
       <button onClick={() => router.push(`/${locale}/movie/${movie.id}`)}>
         <div className="h-16 flex items-start">
           <h3 className="text-xl font-black uppercase leading-tight line-clamp-2 cursor-pointer transition hover:text-accent">
@@ -33,13 +32,16 @@ export function MovieCard({
           </h3>
         </div>
       </button>
-      <button className="block w-full overflow-hidden" onClick={() => router.push(`/${locale}/movie/${movie.id}`)}>
+      <button
+        className="block w-full overflow-hidden"
+        onClick={() => router.push(`/${locale}/movie/${movie.id}`)}
+      >
         <Image
           src={getPoster(movie.poster_path)}
           alt={movie.original_title}
           width={500}
           height={750}
-          className="w-full h-100 object-cover border border-primary cursor-pointer hover:scale-110 transition duration-200"
+          className="w-full h-auto object-cover border border-primary cursor-pointer hover:scale-110 transition duration-200"
         />
       </button>
       {showReleaseDate && (

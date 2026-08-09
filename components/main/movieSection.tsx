@@ -30,8 +30,8 @@ const MovieSection = ({
         </h2>
         <span className="text-sm uppercase text-secondary">See more </span>
       </div>
-      <div className="flex flex-row justify-around gap-10">
-        {movies.slice(0, 5).map((movie) => (
+      <div className="grid grid-rows-1 xl:grid-cols-4 md:grid-cols-2  gap-10 flex-wrap">
+        {movies.slice(0, 4).map((movie) => (
           <MovieCard
             key={movie.id}
             movie={movie}

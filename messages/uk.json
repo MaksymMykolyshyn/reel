@@ -9,9 +9,9 @@
   },
   "Main": {
     "editorsChoice": "Вибір редакції",
-    "topTrending": "Найпопулярніше",
+    "topTrending": "Популярне",
     "upcoming": "Скоро у прокаті",
-    "nowPlaying": "Зараз у кінотеатрах"
+    "nowPlaying": "Зараз у кіно"
   },
   "Archive": {
     "exploreCinema": "Відкривайте для себе світ кіно",

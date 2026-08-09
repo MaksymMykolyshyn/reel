@@ -71,7 +71,6 @@ export default function MovieInfo({ movie, credits }: MovieInfoProps) {
           </div>
         </div>
         <div>
-          <Image src={movie.backdrop_path} alt="image movie" width={400} height={300}/>
         </div>
       </div>
     </>

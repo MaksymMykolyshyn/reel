@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="flex flex-row relative items-center justify-center">
+      <div className="flex flex-row relative items-center justify-center ">
         <div className="text-lg flex justify-center items-center h-10">
           {fullDate}
         </div>

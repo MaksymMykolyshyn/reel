@@ -1,6 +1,12 @@
-import { Movie, MovieResponse, MovieVideos, MovieCredits, Person } from "@/types/movie";
-import MovieRecomend from "@/components/movie/movieRecomend"
-
+import {
+  Movie,
+  MovieResponse,
+  MovieVideos,
+  MovieCredits,
+  Person,
+  Tv,
+  TvResponse
+} from "@/types/movie";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const today = new Date().toISOString().split("T")[0];
@@ -11,23 +17,12 @@ const options = {
   },
 };
 
-
-
 export async function getMovie(id: number, locale: string): Promise<Movie> {
-  const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
-  const response = await fetch(`${BASE_URL}/movie/${id}?language=${tmdbLanguage}`, options);
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch top rated movies");
-  }
-
-  return response.json();
-}
-
-export async function getMovieTrailer(id: number, locale: string): Promise<MovieVideos> {
-  const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
   const response = await fetch(
-    `${BASE_URL}/movie/${id}/videos?language=${tmdbLanguage}`, options);
+    `${BASE_URL}/movie/${id}?language=${tmdbLanguage}`,
+    options,
+  );
 
   if (!response.ok) {
     throw new Error("Failed to fetch top rated movies");
@@ -36,9 +31,12 @@ export async function getMovieTrailer(id: number, locale: string): Promise<Movie
   return response.json();
 }
 
-export async function getMovieCredits(id: number, locale: string): Promise<MovieCredits> {
-  const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
-  const response = await fetch(`${BASE_URL}/movie/${id}/credits?language=${tmdbLanguage}`, options);
+export async function getTv(id: number, locale: string): Promise<Tv> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
+  const response = await fetch(
+    `${BASE_URL}/tv/${id}?language=${tmdbLanguage}`,
+    options,
+  );
 
   if (!response.ok) {
     throw new Error("Failed to fetch top rated movies");
@@ -47,6 +45,61 @@ export async function getMovieCredits(id: number, locale: string): Promise<Movie
   return response.json();
 }
 
+export async function getMovieTrailer( id: number, locale: string ): Promise<MovieVideos> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
+  const response = await fetch(
+    `${BASE_URL}/movie/${id}/videos?language=${tmdbLanguage}`,
+    options,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch top rated movies");
+  }
+
+  return response.json();
+}
+
+export async function getTvTrailer( id: number, locale: string ): Promise<MovieVideos> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
+  const response = await fetch(
+    `${BASE_URL}/tv/${id}/videos?language=${tmdbLanguage}`,
+    options,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch top rated movies");
+  }
+
+  return response.json();
+}
+
+export async function getMovieCredits( id: number, locale: string ): Promise<MovieCredits> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
+  const response = await fetch(
+    `${BASE_URL}/movie/${id}/credits?language=${tmdbLanguage}`,
+    options,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch top rated movies");
+  }
+
+  return response.json();
+}
+
+export async function getTvCredits( id: number, locale: string ): Promise<MovieCredits> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
+  const response = await fetch(
+    `${BASE_URL}/tv/${id}/credits?language=${tmdbLanguage}`,
+    options,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch top rated movies");
+  }
+
+  return response.json();
+}
 
 export async function getWeekMovie(locale: string) {
   const response = await fetch(`${BASE_URL}/trending/movie/week`, options);
@@ -61,24 +114,82 @@ export async function getWeekMovie(locale: string) {
   return await getMovie(movieId, locale);
 }
 
-export async function getTopMovies(locale: string): Promise<MovieResponse> {
-  const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
+export async function getTheGodFather(locale: string): Promise<Movie> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
   const response = await fetch(
-    `${BASE_URL}/movie/top_rated?language=${tmdbLanguage}`,
+    `${BASE_URL}/movie/238?append_to_response=credits&language=${tmdbLanguage}`,
     options,
   );
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch top rated movies");
+  if (!response) {
+    throw new Error("failef to fetch got Father movie");
   }
 
   return response.json();
 }
 
-export async function getTrendingMovies(locale: string): Promise<MovieResponse> {
-  const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
+export async function getDarkKnight(locale: string): Promise<Movie> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
   const response = await fetch(
-    `${BASE_URL}/trending/movie/day?language=${tmdbLanguage}S`,
+    `${BASE_URL}/movie/155?append_to_response=credits&language=${tmdbLanguage}`,
+    options,
+  );
+
+  if (!response) {
+    throw new Error("failef to fetch got Father movie");
+  }
+
+  return response.json();
+}
+
+export async function getTheShawshankRedemption(locale: string): Promise<Movie> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
+  const response = await fetch(
+    `${BASE_URL}/movie/278?append_to_response=credits&language=${tmdbLanguage}`,
+    options,
+  );
+
+  if (!response) {
+    throw new Error("failef to fetch got Father movie");
+  }
+
+  return response.json();
+}
+
+export async function getGameofThrones(locale: string): Promise<Tv> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
+  const response = await fetch(
+    `${BASE_URL}/tv/1399?append_to_response=credits&language=${tmdbLanguage}`,
+    options,
+  );
+
+  if (!response) {
+    throw new Error("failef to fetch got Father movie");
+  }
+
+  return response.json();
+}
+
+// export async function getTopMovies(locale: string): Promise<MovieResponse> {
+//   const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
+//   const response = await fetch(
+//     `${BASE_URL}/movie/top_rated?language=${tmdbLanguage}`,
+//     options,
+//   );
+
+//   if (!response.ok) {
+//     throw new Error("Failed to fetch top rated movies");
+//   }
+
+//   return response.json();
+// }
+
+export async function getTrendingMovies(
+  locale: string,
+): Promise<MovieResponse> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
+  const response = await fetch(
+    `${BASE_URL}/trending/movie/day?language=${tmdbLanguage}`,
     options,
   );
 
@@ -89,8 +200,10 @@ export async function getTrendingMovies(locale: string): Promise<MovieResponse> 
   return response.json();
 }
 
-export async function getUpcomingMovies(locale: string): Promise<MovieResponse> {
-  const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
+export async function getUpcomingMovies(
+  locale: string,
+): Promise<MovieResponse> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
   const response = await fetch(
     `${BASE_URL}/discover/movie?primary_release_date.gte=${today}
     sort_by=primary_release_date.asc&language=${tmdbLanguage}`,
@@ -104,8 +217,10 @@ export async function getUpcomingMovies(locale: string): Promise<MovieResponse> 
   return response.json();
 }
 
-export async function getNowPlayingMovies(locale: string): Promise<MovieResponse> {
-  const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
+export async function getNowPlayingMovies(
+  locale: string,
+): Promise<MovieResponse> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
   const response = await fetch(
     `${BASE_URL}/movie/now_playing?language=${tmdbLanguage}`,
     options,
@@ -119,7 +234,7 @@ export async function getNowPlayingMovies(locale: string): Promise<MovieResponse
 }
 
 export async function getTitanicMovie(locale: string): Promise<Movie> {
-  const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
   const response = await fetch(
     `${BASE_URL}/movie/597?append_to_response=credits&language=${tmdbLanguage}`,
     options,
@@ -131,28 +246,51 @@ export async function getTitanicMovie(locale: string): Promise<Movie> {
   return response.json();
 }
 
-export async function getMoviesByGenre(locale: string, id: number): Promise<MovieResponse> {
-  const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
+export async function getMoviesByGenre(
+  locale: string,
+  id: number,
+): Promise<MovieResponse> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
   const response = await fetch(
     `${BASE_URL}/discover/movie?with_genres=${id}&language=${tmdbLanguage}`,
     options,
   );
-  if(!response.ok) {
-    throw new Error("Failed to fetch movies by genres")
+  if (!response.ok) {
+    throw new Error("Failed to fetch movies by genres");
   }
 
-  return response.json()
+  return response.json();
 }
-export async function getActorById(locale: string, id: number): Promise<Person> {
-  const tmdbLanguage = locale === 'uk' ? 'uk-UA' : 'en-US';
+
+export async function getTvByGenre(
+  locale: string,
+  id: number,
+): Promise<TvResponse> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
+  const response = await fetch(
+    `${BASE_URL}/discover/tv?with_genres=${id}&language=${tmdbLanguage}`,
+    options,
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch movies by genres");
+  }
+
+  return response.json();
+}
+
+export async function getActorById(
+  locale: string,
+  id: number,
+): Promise<Person> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
 
   const response = await fetch(
     `${BASE_URL}/person/${id}?&language=${tmdbLanguage}`,
     options,
   );
-  if(!response.ok) {
-    throw new Error("Failed to fetch movies by genres")
+  if (!response.ok) {
+    throw new Error("Failed to fetch movies by genres");
   }
 
-  return response.json()
+  return response.json();
 }

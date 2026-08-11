@@ -1,10 +1,18 @@
 const IMAGE_URL = "https://image.tmdb.org/t/p";
 
-export function getPoster(path: string) {
-  return `${IMAGE_URL}/w500${path}`;
-}
+export const getPoster = (path: string | null) => {
+  if (!path) {
+    return "/images/no-poster.jpg";
+  }
 
-export function getBackdrop(path: string) {
+  return `https://image.tmdb.org/t/p/w500${path}`;
+};
+
+export function getBackdrop(path: string | null) {
+  if (!path) {
+    return "/images/no-backdrop.jpg"
+  }
+
   return `${IMAGE_URL}/original${path}`;
 }
 

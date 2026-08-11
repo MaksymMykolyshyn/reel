@@ -12,9 +12,9 @@ export default function HeaderMain() {
   const pathname = usePathname();
 
   const handleLanguageChange = (newLocale: string) => {
-  const newPath = pathname.replace(/^\/[^/]+/, `/${newLocale}`);
-  router.push(newPath);
-};
+    const newPath = pathname.replace(/^\/[^/]+/, `/${newLocale}`);
+    router.push(newPath);
+  };
 
   return (
     <header className="w-[1800px] mx-auto">
@@ -27,14 +27,27 @@ export default function HeaderMain() {
           <select
             name="language"
             value={locale}
-            className="border border-accent rounded-lg h-7 text-black tracking-normal"
+            className="border border-accent text-black w-fit font-semibold tracking-wide h-7 md:block hidden"
             onChange={(e) => handleLanguageChange(`${e.target.value}`)}
           >
-            <option value="en">English</option>
-            <option value="uk">Українська</option>
+            <option className="md:block hidden" value="en">
+              English
+            </option>
+            <option className="md:block hidden" value="uk">
+              Українська
+            </option>
+          </select>
+          <select
+            name="language"
+            value={locale}
+            className="border border-accent text-black w-fit font-semibold tracking-wide h-7 block md:hidden"
+            onChange={(e) => handleLanguageChange(`${e.target.value}`)}
+          >
+            <option value="en">En</option>
+            <option value="uk">Укр</option>
           </select>
           <div className="text-3xl border rounded-full p-1 ">
-          <CiUser/>
+            <CiUser />
           </div>
         </div>
       </div>

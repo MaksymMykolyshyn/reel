@@ -1,27 +1,57 @@
-'use client'
+"use client";
 
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 
 export default function Header() {
-
   const t = useTranslations("Header");
-  const router = useRouter()
-  const locale = useLocale()
+  const router = useRouter();
+  const locale = useLocale();
   const date = new Date();
   const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
+  const dayMobileName = date.toLocaleDateString("en-US", { weekday: "short" });
   const monthName = date.toLocaleDateString("en-US", { month: "long" });
+  const monthMobileName = date.toLocaleDateString("en-US", { month: "short" });
   const fullDate = `${dayName}, ${monthName} ${date.getDate()}, ${date.getFullYear()}`;
+  const mobileDate = `${dayMobileName}, ${monthMobileName} ${date.getDate()}`;
 
   return (
     <>
-      <div className="flex flex-row relative items-center justify-center ">
-        <div className="text-lg flex justify-center items-center h-10">
-          {fullDate}
+      <div className="flex flex-row relative items-center justify-center h-10">
+        <div className="flex justify-center items-center">
+          <div className="md:hidden text-lg">
+            {mobileDate}
+          </div>
+
+          <div className="hidden md:block text-lg">
+            {fullDate}
+          </div>
         </div>
-        <select name="language" value={locale} className="border border-accent rounded-lg h-7 absolute right-2" onChange={(e) => router.push(`/${e.target.value}`)}>
-          <option value="en">English</option>
-          <option value="uk">Українська</option>
+        <select
+          name="language"
+          value={locale}
+          className="border border-accent w-fit font-semibold tracking-wide h-7 absolute right-2 md:block hidden"
+          onChange={(e) => router.push(`/${e.target.value}`)}
+        >
+          <option className="md:block hidden" value="en">
+            English
+          </option>
+          <option className="md:block hidden" value="uk">
+            Українська
+          </option>
+        </select>
+        <select
+          name="language"
+          value={locale}
+          className="border border-accent w-fit font-semibold tracking-wide h-7 absolute right-2 block md:hidden"
+          onChange={(e) => router.push(`/${e.target.value}`)}
+        >
+          <option value="en">
+            En
+          </option>
+          <option value="uk">
+            Укр
+          </option>
         </select>
       </div>
 

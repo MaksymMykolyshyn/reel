@@ -1,7 +1,10 @@
 import { Playfair_Display } from "next/font/google";
 
 import {
-  getTopMovies,
+  getTheGodFather,
+  getDarkKnight,
+  getTheShawshankRedemption,
+  getGameofThrones,
   getTrendingMovies,
   getUpcomingMovies,
   getNowPlayingMovies,
@@ -26,11 +29,15 @@ export default async function Home({ params }: { params: Params }) {
   const { locale } = await params;
   const movie = await getWeekMovie(locale);
 
-  const topMovies = await getTopMovies(locale);
+  const theGodFather = await getTheGodFather(locale);
+  const darkKnight = await getDarkKnight(locale)
+  const theShawshankRedemption = await getTheShawshankRedemption(locale)
+  const gameofThrones = await getGameofThrones(locale)
   const trendingMovies = await getTrendingMovies(locale);
   const upcomingMovies = await getUpcomingMovies(locale);
   const nowPlayingMovies = await getNowPlayingMovies(locale);
 
+  console.log(gameofThrones)
   return (
     <div
       className={`${playfairDisplay.className} bg-background text-foreground`}
@@ -46,7 +53,8 @@ export default async function Home({ params }: { params: Params }) {
         <MovieSection
           id="editors-choice"
           title="editorsChoice"
-          movies={topMovies.results}
+          movies={[theGodFather, darkKnight, theShawshankRedemption]}
+          tv={[gameofThrones]}
           showRating
           locale={locale}
         />

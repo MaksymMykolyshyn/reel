@@ -1,26 +1,27 @@
-import { Movie } from "@/types/movie";
-import { MovieCard } from "@/components/movie/movieCard";
+import { Movie, Tv } from "@/types/movie";
+import { MovieCard, TvCard } from "@/components/movie/movieCard";
 import { useTranslations } from "next-intl";
 
 type MovieSectionProps = {
-  id: "editors-choice" | "top-trending" | "upcoming" | "now-playing"
+  id: "editors-choice" | "top-trending" | "upcoming" | "now-playing";
   title: "editorsChoice" | "topTrending" | "upcoming" | "nowPlaying";
   movies: Movie[];
   showReleaseDate?: boolean;
   showRating?: boolean;
-  locale: string
+  locale: string;
+  tv?: Tv[];
 };
 
 const MovieSection = ({
   id,
   title,
-  movies,
+  movies = [],
   showReleaseDate = false,
   showRating = false,
-  locale
+  locale,
+  tv = [],
 }: MovieSectionProps) => {
   const t = useTranslations("Main");
-  
 
   return (
     <section className="w-[95%] mx-auto mt-20 mb-20" id={id}>
@@ -35,6 +36,15 @@ const MovieSection = ({
           <MovieCard
             key={movie.id}
             movie={movie}
+            showReleaseDate={showReleaseDate}
+            showRating={showRating}
+            locale={locale}
+          />
+        ))}
+        {tv.map((tv) => (
+          <TvCard
+            key={tv.id}
+            movie={tv}
             showReleaseDate={showReleaseDate}
             showRating={showRating}
             locale={locale}

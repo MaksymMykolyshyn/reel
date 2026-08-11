@@ -5,7 +5,7 @@ import {
   MovieCredits,
   Person,
   Tv,
-  TvResponse
+  TvResponse,
 } from "@/types/movie";
 
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -45,7 +45,10 @@ export async function getTv(id: number, locale: string): Promise<Tv> {
   return response.json();
 }
 
-export async function getMovieTrailer( id: number, locale: string ): Promise<MovieVideos> {
+export async function getMovieTrailer(
+  id: number,
+  locale: string,
+): Promise<MovieVideos> {
   const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
   const response = await fetch(
     `${BASE_URL}/movie/${id}/videos?language=${tmdbLanguage}`,
@@ -59,7 +62,10 @@ export async function getMovieTrailer( id: number, locale: string ): Promise<Mov
   return response.json();
 }
 
-export async function getTvTrailer( id: number, locale: string ): Promise<MovieVideos> {
+export async function getTvTrailer(
+  id: number,
+  locale: string,
+): Promise<MovieVideos> {
   const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
   const response = await fetch(
     `${BASE_URL}/tv/${id}/videos?language=${tmdbLanguage}`,
@@ -73,7 +79,10 @@ export async function getTvTrailer( id: number, locale: string ): Promise<MovieV
   return response.json();
 }
 
-export async function getMovieCredits( id: number, locale: string ): Promise<MovieCredits> {
+export async function getMovieCredits(
+  id: number,
+  locale: string,
+): Promise<MovieCredits> {
   const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
   const response = await fetch(
     `${BASE_URL}/movie/${id}/credits?language=${tmdbLanguage}`,
@@ -87,7 +96,10 @@ export async function getMovieCredits( id: number, locale: string ): Promise<Mov
   return response.json();
 }
 
-export async function getTvCredits( id: number, locale: string ): Promise<MovieCredits> {
+export async function getTvCredits(
+  id: number,
+  locale: string,
+): Promise<MovieCredits> {
   const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
   const response = await fetch(
     `${BASE_URL}/tv/${id}/credits?language=${tmdbLanguage}`,
@@ -121,7 +133,7 @@ export async function getTheGodFather(locale: string): Promise<Movie> {
     options,
   );
 
-  if (!response) {
+  if (!response.ok) {
     throw new Error("failef to fetch got Father movie");
   }
 
@@ -135,21 +147,23 @@ export async function getDarkKnight(locale: string): Promise<Movie> {
     options,
   );
 
-  if (!response) {
+  if (!response.ok) {
     throw new Error("failef to fetch got Father movie");
   }
 
   return response.json();
 }
 
-export async function getTheShawshankRedemption(locale: string): Promise<Movie> {
+export async function getTheShawshankRedemption(
+  locale: string,
+): Promise<Movie> {
   const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
   const response = await fetch(
     `${BASE_URL}/movie/278?append_to_response=credits&language=${tmdbLanguage}`,
     options,
   );
 
-  if (!response) {
+  if (!response.ok) {
     throw new Error("failef to fetch got Father movie");
   }
 
@@ -163,7 +177,7 @@ export async function getGameofThrones(locale: string): Promise<Tv> {
     options,
   );
 
-  if (!response) {
+  if (!response.ok) {
     throw new Error("failef to fetch got Father movie");
   }
 
@@ -205,7 +219,7 @@ export async function getUpcomingMovies(
 ): Promise<MovieResponse> {
   const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
   const response = await fetch(
-    `${BASE_URL}/discover/movie?primary_release_date.gte=${today}
+    `${BASE_URL}/discover/movie?primary_release_date.gte=${today}&
     sort_by=primary_release_date.asc&language=${tmdbLanguage}`,
     options,
   );
@@ -293,4 +307,19 @@ export async function getActorById(
   }
 
   return response.json();
+}
+
+export async function getPopularMovies(locale: string): Promise<Movie[]> {
+  const tmdbLanguage = locale === "uk" ? "uk-UA" : "en-US";
+  const response = await fetch(
+    `${BASE_URL}/movie/popular?page=1&language=${tmdbLanguage}`,
+    options,
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch movies by genres");
+  }
+
+  const data = await response.json();
+
+  return data.results;
 }

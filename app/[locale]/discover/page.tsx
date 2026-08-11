@@ -1,7 +1,23 @@
-import React from 'react'
+import { getPopularMovies } from "@/lib/tmbd";
+import DiscoverPageClient from "@/components/discover/DiscoverPageClient";
 
-export default function page() {
+type Props = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
+
+export default async function DiscoverPage({ params }: Props) {
+  const { locale } = await params;
+
+  const movies = await getPopularMovies(locale);
+
+  console.log("POPULAR MOVIES:", movies);
+
   return (
-    <div>page</div>
-  )
+    <DiscoverPageClient
+      movies={movies}
+      locale={locale}
+    />
+  );
 }

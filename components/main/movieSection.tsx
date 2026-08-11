@@ -2,6 +2,8 @@ import { Movie, Tv } from "@/types/movie";
 import { MovieCard, TvCard } from "@/components/movie/movieCard";
 import { useTranslations } from "next-intl";
 
+import Link from 'next/link'
+
 type MovieSectionProps = {
   id: "editors-choice" | "top-trending" | "upcoming" | "now-playing";
   title: "editorsChoice" | "topTrending" | "upcoming" | "nowPlaying";
@@ -29,7 +31,7 @@ const MovieSection = ({
         <h2 className="text-5xl font-black uppercase tracking-tight">
           {t(title)}
         </h2>
-        <span className="text-sm uppercase text-secondary">See more </span>
+        <span className="text-sm uppercase text-secondary"><Link href={'/discover'}> See more </Link></span>
       </div>
       <div className="grid grid-rows-1 xl:grid-cols-4 md:grid-cols-2  gap-10 flex-wrap">
         {movies.slice(0, 4).map((movie) => (

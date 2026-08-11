@@ -14,7 +14,11 @@ export default async function MovieRecomend({
   movie,
   locale,
 }: MovieRecomendProps) {
-  const genreId = movie.genres[0].id;
+  const genreId = movie.genres?.[0]?.id;
+
+  if (!genreId) {
+    return null;
+  }
 
   const recommendations = await getMoviesByGenre(locale, genreId);
 
@@ -29,7 +33,7 @@ export default async function MovieRecomend({
       </div>
 
       <div className="flex flex-row justify-around gap-10 flex-wrap">
-        {recommendations.results.slice(0, 5).map((movie) => (
+        {recommendations.results.slice(0, 20).map((movie) => (
           <div
             key={movie.id}
             className="w-full max-w-80 border border-primary p-4 flex flex-col transition hover:border-accent justify-start"

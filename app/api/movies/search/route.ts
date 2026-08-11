@@ -7,6 +7,7 @@ export async function GET(request: NextRequest) {
 
   const query = searchParams.get("query");
   const language = searchParams.get("language") || "en-US";
+  const type = searchParams.get("type") || "multi";
 
   if (!query?.trim()) {
     return NextResponse.json({
@@ -29,10 +30,18 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  let endpoint = "/search/multi";
+
+  if (type === "movie") {
+    endpoint = "/search/movie";
+  } else if (type === "tv") {
+    endpoint = "/search/tv";
+  }
+
   const response = await fetch(
-    `${BASE_URL}/search/movie?query=${encodeURIComponent(
+    `${BASE_URL}${endpoint}?query=${encodeURIComponent(
       query
-    )}&language=${language}`,
+    )}&language=${encodeURIComponent(language)}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -48,7 +57,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(
       {
-        error: "Failed to search movies",
+        error: "Failed to search",
       },
       {
         status: response.status,
